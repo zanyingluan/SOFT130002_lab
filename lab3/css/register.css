@@ -1,0 +1,43 @@
+body {
+    font-family: "方正粗黑宋简体";
+    color:cornflowerblue;
+    background-color: #f6f6f6;
+}
+header nav{
+    position: relative;
+}
+h1{
+    position: absolute;
+    left: 40%;
+    top: 10%;
+}
+.contents{
+    text-align: center;
+    padding: 20px;
+    top: 20%;
+    left: 20%;
+    position: absolute;
+}
+.div-left {
+    font-size:larger;
+    padding: 20px;
+    left: 6%;
+    top: 20px;
+    position:absolute;
+}
+li {
+    display: block;
+    padding: 10px;
+}
+a {
+    text-decoration:none;
+}
+a:hover{
+    color: burlywood;
+}
+a:link{
+    color: cadetblue;
+}
+a:visited{
+    color:rebeccapurple;
+}

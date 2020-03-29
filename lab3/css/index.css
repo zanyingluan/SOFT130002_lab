@@ -1,0 +1,58 @@
+body{
+    font-family: "方正粗黑宋简体";
+    font-size: 20px;
+    color: darkblue;
+    padding: 15px;
+}
+header nav{
+    position: relative;
+    z-index: 100;
+    min-width: 1030px;
+    background-clip: border-box;
+    display: flex;
+    flex-flow: row;
+    box-shadow: 0 0 5px darkgrey;
+}
+a{
+    text-decoration: none;
+}
+img{
+    vertical-align: middle;
+}
+h3{
+    font-size: 20px ;
+}
+.div-right{
+    position: absolute;
+    right: 10%;
+    top: 15px;
+}
+.title{
+    font-size: 25px;
+}
+.functions{
+    list-style-type: georgian;
+    right: 10%;
+    position: absolute;
+}
+.functions li{
+    padding-bottom: 50px;
+    font-size: x-large;
+}
+section{
+    width: 75%;
+    background-clip: padding-box;
+    background-color: aliceblue;
+}
+section h4{
+    font-size:30px;
+    color: black;
+}
+blockquote{
+    font-size: 25px;
+    color:black;
+}
+.active{
+    font-size: 25px;
+    color: black;
+}
