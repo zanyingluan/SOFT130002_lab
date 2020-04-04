@@ -7,6 +7,6 @@
 同时运用在PJ1中的Grid布局
 可以实现响应式分布，使Grid的行列数随着浏览器窗口尺寸的变化而变化
 
-主页如图：
-![Image text](https://raw.githubusercontent.com/zanyingluan/SOFT130002_lab/master/lab4/images/index/index1.png)
-![Image text](https://raw.githubusercontent.com/zanyingluan/SOFT130002_lab/master/lab4/images/index/index2.png)
+主页如图：i
+![Image text](images/index/index1.png)
+![Image text](images/index/index2.png)
