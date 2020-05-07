@@ -11,8 +11,27 @@
 */
 
 function testTime(){
-
+    let value = 1;
+    let runCount = 0;
+    let startMinute = (new Date()).getMinutes();
+    return function(){
+        let interval = setInterval(function () {
+            console.log(value);
+            let currentTime = new Date();//记录当前时间
+            if(currentTime.getMinutes() !== startMinute ){
+                console.log("提前到整分了，我停下了！");
+                clearInterval(interval);
+            }else if(runCount >= 10){
+                console.log("满十次了，我停下了！");
+                clearInterval(interval);
+            }else{
+                value *= 2;
+                runCount++;
+            }
+        }, 5000)
+    }
 }
+
 // testTime();
 
 /*
@@ -24,7 +43,9 @@ function testTime(){
     ④telephone与mail均是字符串。
 */
 function testMail(telephone,mail) {
-
+    let isTelephoneNumber = /^1\d{10}$/.test(telephone);
+    let isEmail = /^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$/.test(mail);
+    console.log("The telephone is " + (isTelephoneNumber ? "right" : "wrong") + " and the mail is " + (isEmail ? "right" : "wrong"))
 }
 
 /*
@@ -37,8 +58,28 @@ function testMail(telephone,mail) {
     ⑤str为字符串。
 */
 function testRedundancy(str) {
+    let wordSet = new Set(str.split(" "));
+    let regExpStr = '';
+    for(let value of wordSet){ //遍历wordSet，将str分割好，最终得到一个最终模式的regExpstr字符串
+        let newSubStr = "(" + value + " " +value + ")";
+        regExpStr += newSubStr + "|"
+    }
+    regExpStr = regExpStr.substring(0,regExpStr.length - 1);
+    let reg = new RegExp('^' + regExpStr + '$','gi');//利用RegExp对象执行对大小写不敏感的，全局的匹配
+    let result = str.match(reg);
 
+    result.sort(); //按照大小写排序
+    let resultSet = new Set();
+    for(let value of result){
+        if(resultSet.size === 10){
+            break;
+        }
+        resultSet.add(value);
+    }
+    console.log(resultSet);
 }
+
+
 
 
 /*
@@ -56,7 +97,12 @@ function testRedundancy(str) {
     ①注意联系生活，并注意观察我给的上述例子。
 */
 function testKeyBoard(wantInput, actualInput) {
-
+    let upperCaseActualInputSet = new Set(actualInput.toUpperCase().split(""));
+    let upperCaseWantInputSet = new Set(wantInput.toUpperCase().split(""));
+    for(let value of upperCaseActualInputSet){
+        upperCaseWantInputSet.delete(value);
+    }
+    console.log(upperCaseWantInputSet)
 }
 
 /*
@@ -72,6 +118,15 @@ function testKeyBoard(wantInput, actualInput) {
     ⑤str为字符串。
 */
 function testSpecialReverse(str) {
+    let splitReversedArray  = str.trim().split(" ").reverse();
+    let resultArray = [];
+    for(let i = 0 ;i < splitReversedArray.length ; i++){
+        if(splitReversedArray[i].trim() !== ""){
+            resultArray.push(splitReversedArray[i]);
+        }
+    }
+    console.log(resultArray.join().replace(/,/g," "));
+
 }
 
 /*
@@ -90,6 +145,14 @@ function testSpecialReverse(str) {
 */
 
 function twoSum(nums, target) {
+    let map = new Map();
+    for(let i = 0; i < nums.length; i++){
+        if(map.has(target - nums[i])){
+            console.log([i, map.get(target - nums[i])]);
+        }
+        map.set(nums[i], i);
+    }
+
 }
 
 
@@ -99,12 +162,27 @@ function twoSum(nums, target) {
     打印最长的包含不同字符串的子字符串长度。
 要求：
     ①使用Map。
-    ②例如：输入"abbbbb",输出1，输入"bbbbb",输出2；
+    ②例如：输入"abbbbb",输出2，输入"bbbbb",输出1；
     ③只能显式使用一次循环。
     ④使用console.log打印即可。
     ⑤str为字符串。
 */
 function lengthOfLongestSubstring(str) {
+    let map = new Map();
+    let max = 0;
+    let count = 0;
+    for(let i = 0; i < str.length; i++){
+        if(map.has(str.charAt(i))){
+            max = Math.max(count,max);
+            i = map.get(str.charAt(i))
+            map.clear();
+            count = 0;
+        }else {
+            map.set(str.charAt(i),i);
+            count++;
+        }
+    }
+    console.log(max);
 }
 
 /*
@@ -119,3 +197,59 @@ function lengthOfLongestSubstring(str) {
 function Country() {
     this.name = "国家";
 }
+
+//DevelopingCountry借助构造函数继承
+function DevelopingCountry() {
+    Country.call(this);
+    this.sayHi = function () {
+        console.log("Hi,I am a developing country.");
+    }
+}
+
+let developingCountryInstance = new DevelopingCountry()//new一个对象，方便测试
+
+//PoorCountry借助原型链继承
+function PoorCountry(){}
+PoorCountry.prototype = new Country();
+PoorCountry.prototype.saySad = function () {
+    console.log("I am a sad poor country.");
+};
+
+let poorCountryInstance = new PoorCountry()//new一个对象，方便测试
+
+//DevelopedCountry借助Object.create()继承
+let countryInstance = new Country();
+let developedCountryInstance = Object.create(countryInstance);
+developedCountryInstance.sayHappy = function () {
+    console.log("I am a Happy developed country.")
+};
+
+
+
+
+//test
+(function(){
+    console.log("第二题");
+    testMail(13003278231, "375577809@qq.com");
+    console.log("第三题");
+    testRedundancy("Is is the iS is cost of of gasoline going up up");
+    console.log("第四题");
+    testKeyBoard('7 This is a test', ' hs s a es');
+    console.log("第五题");
+    testSpecialReverse(" hello   the   world!  ");
+    console.log("第六题");
+    twoSum([2, 7, 11, 15], 9);
+    console.log("第七题");
+    lengthOfLongestSubstring("abbbbbbb");
+    lengthOfLongestSubstring("bbbbbb");
+    console.log("第八题");
+    developedCountryInstance.sayHappy();
+    developingCountryInstance.sayHi();
+    poorCountryInstance.saySad();
+
+
+
+    console.log("最后测试第一题");
+    let Test1 = testTime();
+    Test1();
+})()
