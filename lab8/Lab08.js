@@ -1,11 +1,17 @@
-
 /*请在该区域内声明或者获取所要使用的全局变量*/
 /********************************************begin************************************/
+//这三个常量用来获取会使用到的结点
+const CONTAINER = document.getElementsByClassName("container")[0];//获取主容器，主要用来进行鼠标在内在外的判定
+const PICTURES = document.getElementsByClassName("wrap")[0].getElementsByTagName("img");//获取图片集合
+const BUTTONS = document.getElementsByClassName("buttons")[0].getElementsByTagName("span"); //获取数字按钮的集合
 
-/*Global Variable Area */
+//这两个常量用来进行轮播的计算
+const LENGTH = PICTURES.length;//图片数组的最大个数
+let currentPosition = 0;//轮播当前所在的位置
+
+let timer;
 
 /*********************************************end*************************************/
-
 
 
 /* 任务一
@@ -21,11 +27,29 @@
  * ⑤本部分只能使用原生JS。
  */
 /********************************************begin************************************/
+PICTURES[0].style.opacity = "1";
 
-/*Code Here*/
+function scroll(n) {
+    let target = currentPosition + n;
+    while (target < 0) {
+        target += LENGTH;
+    }
+    target %= LENGTH;
+    if (target !== currentPosition) {
+        if (n > 0) {
+            PICTURES[currentPosition].style.animation = "scroll-out-left 0.5s ease-in-out forwards";
+            PICTURES[target].style.animation = "scroll-in-left 0.5s ease-in-out forwards";
+        } else {
+            PICTURES[currentPosition].style.animation = "scroll-out-right 0.5s ease-in-out forwards";
+            PICTURES[target].style.animation = "scroll-in-right 0.5s ease-in-out forwards";
+        }
+        BUTTONS[currentPosition].className = "";
+        BUTTONS[target].className = "on";
+        currentPosition = target;
+    }
+}
 
 /*********************************************end*************************************/
-
 
 
 /* 任务二
@@ -39,10 +63,16 @@
  */
 /********************************************begin************************************/
 
-/*Code Here*/
+timer = setInterval("scroll(1)", 2000);
+
+CONTAINER.onmouseover = function () {
+    clearInterval(timer);
+}
+CONTAINER.onmouseout = function () {
+    timer = setInterval("scroll(1)", 2000);
+}
 
 /*********************************************end*************************************/
-
 
 
 /* 任务三
@@ -54,7 +84,21 @@
  */
 /********************************************begin************************************/
 
-/*Code Here*/
+function buttonsClicked(target) {
+    let differ = target - currentPosition;
+    if (differ > 0) {
+        scroll(differ);
+    } else if (differ < 0) {
+        scroll(differ);
+    }
+    currentPosition = target;
+}
+
+for (let i = 0; i < LENGTH; i++) {
+    BUTTONS[i].onmousedown = function () {
+        buttonsClicked(i);
+    }
+}
 
 /*********************************************end*************************************/
 
@@ -68,6 +112,17 @@
  */
 /********************************************begin************************************/
 
-/*Code Here*/
+$(document).ready(function () {
+    $("td").dblclick(function () {
+        let value = $(this).text();
+        let input = $("<input type='text' value='" + value + "'/>");
+        $(this).html(input);
+        input.focus();
+
+        input.blur(function () {
+            input.parent().html(input.val());
+        });
+    });
+});
 
 /*********************************************end*************************************/

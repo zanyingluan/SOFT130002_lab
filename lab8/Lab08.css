@@ -14,15 +14,18 @@ a{
     overflow: hidden;
 }
 .container .wrap {
-    position: absolute;
-    width: 4200px;
+    display: flex;
+    width: 600px;
     height: 400px;
     z-index: 1;
 }
 .container .wrap img {
-    float: left;
+    position: absolute;
+    opacity: 0;
+    display: inline-block;
     width: 600px;
     height: 400px;
+    object-fit: cover;
 }
 .container .buttons {
     position: absolute;
@@ -50,7 +53,7 @@ a{
     position: absolute;
     top: 35%;
     color: green;
-    padding:0px 14px;
+    padding:0 14px;
     border-radius: 50%;
     font-size: 50px;
     z-index: 2;
@@ -67,4 +70,84 @@ a{
 }
 .container .arrow:hover {
     background-color: rgba(0,0,0,0.2);
+}
+
+h3{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 45%;
+    padding-top: 2rem;
+    margin-bottom:-5rem;
+}
+
+table{
+    margin: 2rem auto;
+    width: 600px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 3px 3px 3px gray;
+}
+
+@keyframes scroll-out-left {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    to {
+        left: -100%;
+        opacity: 0;
+    }
+}
+
+@keyframes scroll-out-right {
+    from {
+        left: 0;
+        opacity: 1;
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    to {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes scroll-in-left {
+    from {
+        left: 100%;
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes scroll-in-right {
+    from {
+        left: -100%;
+        opacity: 0;
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    to {
+        left: 0;
+        opacity: 1;
+    }
 }

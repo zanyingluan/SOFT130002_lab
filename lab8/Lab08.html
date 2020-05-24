@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang= "zh">
 <head>
     <meta charset="UTF-8">
     <title>Lab08</title>
@@ -9,14 +9,12 @@
 <h3>热门景点排序及热度统计</h3>
 <div id="bd">
     <div class="container">
-        <div class="wrap" style="left: -600px;">
-            <img src="5.jpg" alt="5">
-            <img src="1.jpg" alt="1">
-            <img src="2.jpg" alt="2">
-            <img src="3.jpg" alt="3">
-            <img src="4.jpg" alt="4">
-            <img src="5.jpg" alt="5">
-            <img src="1.jpg" alt="1">
+        <div class="wrap">
+            <img src="picture/1.jpg" alt="1">
+            <img src="picture/2.jpg" alt="2">
+            <img src="picture/3.jpg" alt="3">
+            <img src="picture/4.jpg" alt="4">
+            <img src="picture/5.jpg" alt="5">
         </div>
         <div class="buttons">
             <span class="on">1</span>
@@ -25,8 +23,8 @@
             <span>4</span>
             <span>5</span>
         </div>
-        <a href="javascript:" class="arrow arrow_left">&lt;</a>
-        <a href="javascript:" class="arrow arrow_right">&gt;</a>
+        <a href="javascript:scroll(-1)" class="arrow arrow_left">&lt;</a>
+        <a href="javascript:scroll(1)" class="arrow arrow_right">&gt;</a>
     </div>
     <table border="1">
         <tr>
@@ -56,7 +54,8 @@
         </tr>
     </table>
 </div>
+
 <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
-<script src="Lab08.js"></script>
+<script type="text/javascript" src="Lab08.js"></script>
 </body>
 </html>
