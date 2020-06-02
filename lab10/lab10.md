@@ -240,7 +240,7 @@ For example, the  **username** we set is `testuser` and **password** is `mypassw
          <h1>User Input</h1> 
       </div>
       <div class="ui segment">
-         <div class="ui grid">
+         <div class="ui grid">##
             <div class="four wide column">
                <div class="ui link list"> 
                   <?php outputArtists(); ?>
